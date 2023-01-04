@@ -8,46 +8,138 @@
  * Selection Sort O(n^2)
  * Sorts vector in place.
  * */
+
 template <typename iterator, typename Comparison>
 void selectionSort(iterator first, iterator last, Comparison comparison)
 {
-	for (iterator i = first; i != last; i++)
+	if (first == last)
+		return;
+	
+	do
 	{
-		iterator low = i;
-		for (iterator j = i+1; j != last; j++)
+		iterator low = first;
+		iterator current = first;
+		current++;
+
+		while (current != last)
 		{
-			if (comparison(*j, *low))
+			if (comparison(*current, *low))
 			{
-				low = j;
+				low = current;
 			}
+			current++;
 		}
-		std::swap(*i, *low);
-	}
+
+		std::iter_swap(first, low);
+		first++;
+
+	} while(first != last);
 }
 
 template <typename T, typename Comparison = std::less<T>>
-void selectionSort(std::vector<T>& v, Comparison comparison = Comparison() )
+void selectionSort(std::vector<T>& vec, Comparison comparison = Comparison() )
 {
-	selectionSort(v.begin(), v.end(), comparison);
+	selectionSort(vec.begin(), vec.end(), comparison);
 }
 
+template <typename T, typename Comparison = std::less<T>>
+void selectionSort(std::list<T>& list, Comparison comparison = Comparison() )
+{
+	selectionSort(list.begin(), list.end(), comparison);
+}
 
 /*
  * bubble Sort
  * Big O = 
  * */
 
-template <typename T, typename Comparison = std::less<T>>
-void bubbleSort(std::vector<T>& v, Comparison comparison = Comparison())
+template <typename iterator, typename Comparison>
+void bubbleSort(iterator first, iterator last, Comparison comparison)
 {
-	bubbleSort(v.begin(), v.end(), comparison);
+	if (first == last)
+		return;
+
+	bool swapped;
+
+	do
+	{
+		swapped = false;
+		iterator follow = first;
+		iterator lead = follow;
+		lead++;
+
+		while (lead != last)
+		{
+			if (comparison(*lead, *follow))
+			{
+				std::iter_swap(lead, follow);
+				swapped = true;
+			}
+
+			follow++;
+			lead++;
+		}
+
+		last--;
+
+	} while ( first != last && swapped);
 }
+
+template <typename T, typename Comparison = std::less<T>>
+void bubbleSort(std::vector<T>& vec, Comparison comparison = Comparison() )
+{
+	bubbleSort(vec.begin(), vec.end(), comparison);
+}
+
+template <typename T, typename Comparison = std::less<T>>
+void bubbleSort(std::list<T>& list, Comparison comparison = Comparison() )
+{
+	bubbleSort(list.begin(), list.end(), comparison);
+}
+
 
 /*
  * Insertion Sort
  * Big O = 
  * */
 
+template <typename iterator, typename Comparison>
+void insertionSort(iterator first, iterator last, Comparison comparison)
+{
+	if (first == last)
+		return;
+	
+	iterator i = first;
+	i++;
+
+	do
+	{
+		iterator lead = i;
+		iterator follow = lead;
+		follow--;
+
+		while (comparison(*lead, *follow) && lead != first)
+		{
+			std::iter_swap(lead,follow);
+			lead--;
+			follow--;
+		}
+
+		i++;
+	} while (i != last);
+}
+
+template <typename T, typename Comparison = std::less<T>>
+void insertionSort(std::vector<T>& vec, Comparison comparison = Comparison() )
+{
+	insertionSort(vec.begin(), vec.end(), comparison);
+}
+
+template <typename T, typename Comparison = std::less<T>>
+void insertionSort(std::list<T>& list, Comparison comparison = Comparison() )
+{
+	insertionSort(list.begin(), list.end(), comparison);
+}
 
 /*
  * Merge Sort
