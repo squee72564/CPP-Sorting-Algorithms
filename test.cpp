@@ -1,7 +1,6 @@
 #include <iostream>
 #include <random>
-#include <iterator>
-#include <list>
+
 #include "SortingAlgorithms.h"
 
 template <typename T>
@@ -16,9 +15,10 @@ void shuffle(std::vector<T>&);
 template <typename T>
 void shuffle(std::list<T>&);
 
-int main () {
+int main ()
+{
 
-	std::vector<int> intVec = {6,5,4,3,2,1,0,7,8,9};
+	std::vector<int> intVec =    {6,5,4,3,2,1,0,7,8,9,10,11,12,13,14};
 	std::list<float> floatList = {19.23f,18.523f,17.23f,15.44f,23.2f,41.00001f,41.00009f};
 	
 
@@ -34,6 +34,9 @@ int main () {
 	std::cout << intVec << "\n";
 	shuffle(intVec);
 
+	mergeSort(intVec);
+	std::cout << intVec << "\n";
+	shuffle(intVec);
 
 
 	selectionSort(floatList, std::greater<decltype(floatList)::value_type>());
@@ -45,6 +48,10 @@ int main () {
 	shuffle(floatList);
 
 	insertionSort(floatList, std::greater<decltype(floatList)::value_type>());
+	std::cout << floatList << "\n";
+	shuffle(floatList);
+
+	mergeSort(floatList, std::greater<decltype(floatList)::value_type>());
 	std::cout << floatList << "\n";
 	shuffle(floatList);
 
@@ -88,3 +95,4 @@ void shuffle(std::list<T>& list)
 
 	std::move(temp.begin(), temp.end(), std::back_inserter(list)); 
 }
+

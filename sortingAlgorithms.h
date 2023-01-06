@@ -1,14 +1,15 @@
 #ifndef SORTING_ALGORITHMS_H
 #define SORTING_ALGORITHMS_H
 #include <vector>
+#include <list>
 #include <utility>
 #include <algorithm>
+#include <iterator>
 
 /*
  * Selection Sort O(n^2)
  * Sorts vector in place.
  * */
-
 template <typename iterator, typename Comparison>
 void selectionSort(iterator first, iterator last, Comparison comparison)
 {
@@ -52,7 +53,6 @@ void selectionSort(std::list<T>& list, Comparison comparison = Comparison() )
  * bubble Sort
  * Big O = 
  * */
-
 template <typename iterator, typename Comparison>
 void bubbleSort(iterator first, iterator last, Comparison comparison)
 {
@@ -102,7 +102,6 @@ void bubbleSort(std::list<T>& list, Comparison comparison = Comparison() )
  * Insertion Sort
  * Big O = 
  * */
-
 template <typename iterator, typename Comparison>
 void insertionSort(iterator first, iterator last, Comparison comparison)
 {
@@ -126,6 +125,7 @@ void insertionSort(iterator first, iterator last, Comparison comparison)
 		}
 
 		i++;
+		
 	} while (i != last);
 }
 
@@ -146,6 +146,61 @@ void insertionSort(std::list<T>& list, Comparison comparison = Comparison() )
  * Big O = 
  * */
 
+template <typename iterator, typename Comparison>
+void merge(iterator first, iterator mid, iterator last, Comparison& comparison)
+{
+	std::vector<typename iterator::value_type> temp;
+	temp.reserve(std::distance(first,last));
+
+	iterator left = first;
+	iterator right = mid;
+
+	while (left != mid && right != last)
+	{
+		if (comparison(*right, *left))
+		{
+			temp.emplace_back(*right++);
+		}
+		else
+		{
+			temp.emplace_back(*left++);
+		}
+	}
+
+	temp.insert(temp.end(), left, mid);
+	temp.insert(temp.end(), right, last);
+
+	std::move(temp.begin(), temp.end(), first);
+}
+
+template <typename iterator, typename Comparison = std::less<typename iterator::value_type>>
+void mergeSort(iterator first, iterator last, Comparison comparison = Comparison())
+{
+	int size = std::distance(first, last);
+	if (size <= 1)
+	{
+		return;
+	}
+
+	auto mid = std::next(first, size / 2);
+
+	mergeSort(first, mid, comparison);
+	mergeSort(mid, last, comparison);
+	
+	merge(first, mid, last, comparison);
+}
+
+template <typename T, typename Comparison = std::less<T>>
+void mergeSort(std::vector<T>& vec, Comparison comparison = Comparison() )
+{
+	mergeSort(vec.begin(), vec.end(), comparison);
+}
+
+template <typename T, typename Comparison = std::less<T>>
+void mergeSort(std::list<T>& list, Comparison comparison = Comparison() )
+{
+	mergeSort(list.begin(), list.end(), comparison);
+}
 
 /*
  * Heap Sort
