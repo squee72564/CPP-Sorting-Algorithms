@@ -6,5 +6,7 @@ My goal is to use templates to make use of the Iterators used for various contai
 Topics learned with this project:
 
 C++ iterator types
+
 Template Programming
+
 Sorting Algorithm Implementation
