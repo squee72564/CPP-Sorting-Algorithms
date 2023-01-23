@@ -196,6 +196,7 @@ template <typename iterator, typename Comparison = std::less<typename iterator::
 void mergeSort(iterator first, iterator last, Comparison comparison = Comparison())
 {
 	int size = std::distance(first, last);
+	
 	if (size <= 1)
 	{
 		return;
