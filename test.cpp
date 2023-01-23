@@ -20,7 +20,8 @@ int main ()
 
 	std::vector<int> intVec =    {6,5,4,3,2,1,0,7,8,9,10,11,12,13,14};
 	std::list<float> floatList = {19.23f,18.523f,17.23f,15.44f,23.2f,41.00001f,41.00009f};
-	
+	std::vector<char> charVec = {'f','s','r','u','o','a','b','d','c','x','z','u','y','t','j','k','m','n','e'};
+	std::list<char> charList = {'f','s','r','u','o','a','b','d','c','x','z','u','y','t','j','k','m','n','e'};
 
 	selectionSort(intVec);
 	std::cout << intVec << "\n";
@@ -55,6 +56,40 @@ int main ()
 	std::cout << floatList << "\n";
 	shuffle(floatList);
 
+
+	selectionSort(charVec);
+	std::cout << charVec << "\n";
+	shuffle(charVec);
+
+	bubbleSort(charVec);
+	std::cout << charVec << "\n";
+	shuffle(charVec);
+
+	insertionSort(charVec);
+	std::cout << charVec << "\n";
+	shuffle(charVec);
+
+	mergeSort(charVec);
+	std::cout << charVec << "\n";
+	shuffle(charVec);
+
+
+	selectionSort(charList, std::greater<decltype(floatList)::value_type>());
+	std::cout << charList << "\n";
+	shuffle(charList);
+
+	bubbleSort(charList, std::greater<decltype(floatList)::value_type>());
+	std::cout << charList << "\n";
+	shuffle(charList);
+
+	insertionSort(charList, std::greater<decltype(floatList)::value_type>());
+	std::cout << charList << "\n";
+	shuffle(charList);
+
+	mergeSort(charList, std::greater<decltype(floatList)::value_type>());
+	std::cout << charList << "\n";
+	shuffle(charList);
+
 	return 0;
 }
 
@@ -87,9 +122,9 @@ void shuffle(std::list<T>& list)
 	temp.reserve(list.size());
 	std::move(list.begin(), list.end(), std::back_inserter(temp)); 
 
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(temp.begin(), temp.end(), g);
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::shuffle(temp.begin(), temp.end(), g);
 
 	list.clear();
 
