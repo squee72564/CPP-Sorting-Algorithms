@@ -120,7 +120,7 @@ void insertionSort(iterator first, iterator last, Comparison comparison)
 {
 	if (first == last)
 		return;
-	
+
 	iterator i = first;
 	i++;
 
@@ -130,9 +130,9 @@ void insertionSort(iterator first, iterator last, Comparison comparison)
 		iterator follow = lead;
 		follow--;
 
-		while (comparison(*lead, *follow) && lead != first)
+		while (lead != first && comparison(*lead, *follow))
 		{
-			std::iter_swap(lead,follow);
+			std::iter_swap(lead, follow);
 			lead--;
 			follow--;
 		}
