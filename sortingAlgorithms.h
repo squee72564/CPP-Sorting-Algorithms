@@ -2,6 +2,7 @@
 #define SORTING_ALGORITHMS_H
 #include <vector>
 #include <list>
+#include <array>
 #include <utility>
 #include <algorithm>
 #include <iterator>
@@ -41,6 +42,12 @@ template <typename T, typename Comparison = std::less<T>>
 void selectionSort(std::vector<T>& vec, Comparison comparison = Comparison() )
 {
 	selectionSort(vec.begin(), vec.end(), comparison);
+}
+
+template <typename T, std::size_t N, typename Comparison = std::less<T>>
+void selectionSort(std::array<T, N>& arr, Comparison comparison = Comparison() )
+{
+	selectionSort(arr.begin(), arr.end(), comparison);
 }
 
 template <typename T, typename Comparison = std::less<T>>
@@ -91,6 +98,12 @@ void bubbleSort(std::vector<T>& vec, Comparison comparison = Comparison() )
 	bubbleSort(vec.begin(), vec.end(), comparison);
 }
 
+template <typename T, std::size_t N, typename Comparison = std::less<T>>
+void bubbleSort(std::array<T, N>& arr, Comparison comparison = Comparison() )
+{
+	bubbleSort(std::begin(arr), std::end(arr), comparison);
+}
+
 template <typename T, typename Comparison = std::less<T>>
 void bubbleSort(std::list<T>& list, Comparison comparison = Comparison() )
 {
@@ -135,6 +148,12 @@ void insertionSort(std::vector<T>& vec, Comparison comparison = Comparison() )
 	insertionSort(vec.begin(), vec.end(), comparison);
 }
 
+template <typename T, std::size_t N, typename Comparison = std::less<T>>
+void insertionSort(std::array<T, N>& arr, Comparison comparison = Comparison() )
+{
+	insertionSort(arr.begin(), arr.end(), comparison);
+}
+
 template <typename T, typename Comparison = std::less<T>>
 void insertionSort(std::list<T>& list, Comparison comparison = Comparison() )
 {
@@ -149,7 +168,7 @@ void insertionSort(std::list<T>& list, Comparison comparison = Comparison() )
 template <typename iterator, typename Comparison>
 void merge(iterator first, iterator mid, iterator last, Comparison& comparison)
 {
-	std::vector<typename iterator::value_type> temp;
+	std::vector<typename std::iterator_traits<iterator>::value_type> temp;
 	temp.reserve(std::distance(first,last));
 
 	iterator left = first;
@@ -194,6 +213,12 @@ template <typename T, typename Comparison = std::less<T>>
 void mergeSort(std::vector<T>& vec, Comparison comparison = Comparison() )
 {
 	mergeSort(vec.begin(), vec.end(), comparison);
+}
+
+template <typename T, std::size_t N, typename Comparison = std::less<T>>
+void mergeSort(std::array<T, N>& arr, Comparison comparison = Comparison() )
+{
+	mergeSort(arr.begin(), arr.end(), comparison);
 }
 
 template <typename T, typename Comparison = std::less<T>>
