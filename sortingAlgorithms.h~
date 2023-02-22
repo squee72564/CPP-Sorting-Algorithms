@@ -8,8 +8,7 @@
 #include <iterator>
 
 /*
- * Selection Sort
- * Big O = O(n^2)
+ * Selection Sort O(n^2)
  * Sorts vector in place.
  * */
 template <typename iterator, typename Comparison>
@@ -59,7 +58,7 @@ void selectionSort(std::list<T>& list, Comparison comparison = Comparison() )
 
 /*
  * bubble Sort
- * Big O = O(n^2) 
+ * Big O = 
  * */
 template <typename iterator, typename Comparison>
 void bubbleSort(iterator first, iterator last, Comparison comparison)
@@ -114,7 +113,7 @@ void bubbleSort(std::list<T>& list, Comparison comparison = Comparison() )
 
 /*
  * Insertion Sort
- * Big O = O(n^2) 
+ * Big O = 
  * */
 template <typename iterator, typename Comparison>
 void insertionSort(iterator first, iterator last, Comparison comparison)
@@ -163,7 +162,7 @@ void insertionSort(std::list<T>& list, Comparison comparison = Comparison() )
 
 /*
  * Merge Sort
- * Big O = O(nlogn)
+ * Big O = 
  * */
 
 template <typename iterator, typename Comparison>
@@ -234,12 +233,7 @@ void mergeSort(std::list<T>& list, Comparison comparison = Comparison() )
 
 /*
  * Heap Sort
- * Big O = O(nlogn)
+ * Big O = 
  * */
-template <typename iterator, typename Comparison = std::less<typename iterator::value_type>>
-void heapSort(iterator first, iterator last, Comparison comparison = Comparison()) 
-{
-	std::make_heap(first, last);
-	std::sort_heap(first, last);
-}
+
 #endif
